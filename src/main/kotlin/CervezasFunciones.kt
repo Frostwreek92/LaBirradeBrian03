@@ -26,7 +26,7 @@ object CervezasDAO {
                                 tipoCerveza = rs.getString("tipoCerveza"),
                                 colorCerveza = rs.getString("colorCerveza"),
                                 origenCerveza = rs.getString("origenCerveza"),
-                                precioCerveza = rs.getDouble("puntuacionCerveza"),
+                                precioCerveza = rs.getDouble("precioCerveza"),
                                 cantidadCerveza = rs.getInt("cantidadCerveza")
                             )
                         )
@@ -124,7 +124,7 @@ fun imprimirCervezas() {
                 "${it.tipoCerveza}, " +
                 "${it.colorCerveza}, " +
                 "${it.origenCerveza}, " +
-                "${it.precioCerveza}*, " +
+                "${it.precioCerveza}, " +
                 "${it.cantidadCerveza}")
     }
 }
@@ -181,8 +181,8 @@ fun eliminarCerveza() {
     CervezasDAO.eliminarCerveza(id)
 }
 fun calcularTotalPrecioCervezaPorId () {
-    imprimirTapas()
-    val idIntroducido = introducirDatos.leerDato("Introduce Id de Tapa que deseas calcular: ", Int::class.java, 0)
+    imprimirCervezas()
+    val idIntroducido = introducirDatos.leerDato("Introduce Id de Cerveza que deseas calcular: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         val sql = "SELECT fn_total_valor_cerveza(?)"
         conn.prepareStatement(sql).use { stmt ->
