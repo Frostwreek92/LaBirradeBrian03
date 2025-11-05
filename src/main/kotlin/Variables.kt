@@ -24,7 +24,8 @@ class Variables {
         3. Insertar Cerveza nueva
         4. Actualizar Cerveza por ID
         5. Eliminar Cerveza por ID
-        6. Volver
+        6. Calcula precio total Cerveza por ID
+        7. Volver
     """.trimIndent()
     val menuTapas = "\n" + """Menú Tapas:
         1. Listar Tapas actuales
@@ -74,7 +75,7 @@ class Variables {
             "tipoCerveza, " +
             "colorCerveza, " +
             "origenCerveza, " +
-            "puntuacionCerveza, " +
+            "precioCerveza, " +
             "cantidadCerveza) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?)"
     val queryActualizarCerveza = "UPDATE Cervezas SET (nombreCerveza, " +
@@ -82,7 +83,7 @@ class Variables {
             "tipoCerveza, " +
             "colorCerveza, " +
             "origenCerveza, " +
-            "puntuacionCerveza, " +
+            "precioCerveza, " +
             "cantidadCerveza) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?)"
     val queryEliminarCerveza = "DELETE FROM Cervezas WHERE idCerveza = ?"

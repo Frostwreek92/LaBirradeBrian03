@@ -24,15 +24,16 @@ class Iniciar {
         variables.salirCervezas = false
         while (!variables.salirCervezas) {
             println(variables.menuCervezas)
-            val opcion = introducirDatos.leerDato("Introduce una opción entre 1 y 6: ", Int::class.java, 0)
+            val opcion = introducirDatos.leerDato("Introduce una opción entre 1 y 7: ", Int::class.java, 0)
             when (opcion) {
                 1 -> imprimirCervezas()
                 2 -> imprimirCervezaSeleccionada()
                 3 -> escribirInsertarCerveza()
                 4 -> escribirActualizarCerveza()
                 5 -> eliminarCerveza()
-                6 -> variables.salirCervezas = funciones.finEleccion()
-                else -> println("\nIntroduce un número entre el 1 y 6")
+                6 -> calcularTotalPrecioCervezaPorId()
+                7 -> variables.salirCervezas = funciones.finEleccion()
+                else -> println("\nIntroduce un número entre el 1 y 7")
             }
         }
     }
@@ -47,7 +48,7 @@ class Iniciar {
                 3 -> escribirInsertarTapa()
                 4 -> escribirActualizarTapa()
                 5 -> eliminarTapa()
-                6 -> funciones.llamarProcedure()
+                6 -> calcularTotalPrecioTapaPorId()
                 7 -> variables.salirTapas = funciones.finEleccion()
                 else -> println("\nIntroduce un número entre el 1 y 7")
             }

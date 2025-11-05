@@ -7,7 +7,7 @@ data class Cerveza(
     val tipoCerveza: String,
     val colorCerveza: String,
     val origenCerveza: String,
-    val puntuacionCerveza: Double,
+    val precioCerveza: Double,
     val cantidadCerveza: Int
 )
 object CervezasDAO {
@@ -26,7 +26,7 @@ object CervezasDAO {
                                 tipoCerveza = rs.getString("tipoCerveza"),
                                 colorCerveza = rs.getString("colorCerveza"),
                                 origenCerveza = rs.getString("origenCerveza"),
-                                puntuacionCerveza = rs.getDouble("puntuacionCerveza"),
+                                precioCerveza = rs.getDouble("puntuacionCerveza"),
                                 cantidadCerveza = rs.getInt("cantidadCerveza")
                             )
                         )
@@ -51,7 +51,7 @@ object CervezasDAO {
                             tipoCerveza = rs.getString("tipoCerveza"),
                             colorCerveza = rs.getString("colorCerveza"),
                             origenCerveza = rs.getString("origenCerveza"),
-                            puntuacionCerveza = rs.getDouble("puntuacionCerveza"),
+                            precioCerveza = rs.getDouble("puntuacionCerveza"),
                             cantidadCerveza = rs.getInt("cantidadCerveza")
                         )
                     }
@@ -69,7 +69,7 @@ object CervezasDAO {
                 stmt.setString(3, cerveza.tipoCerveza)
                 stmt.setString(4, cerveza.colorCerveza)
                 stmt.setString(5, cerveza.origenCerveza)
-                stmt.setDouble(6, cerveza.puntuacionCerveza)
+                stmt.setDouble(6, cerveza.precioCerveza)
                 stmt.setInt(7, cerveza.cantidadCerveza)
                 stmt.executeUpdate()
                 println("\nCerveza '${cerveza.nombreCerveza}' insertada con éxito")
@@ -89,7 +89,7 @@ object CervezasDAO {
                 stmt.setString(3, cerveza.tipoCerveza)
                 stmt.setString(4, cerveza.colorCerveza)
                 stmt.setString(5, cerveza.origenCerveza)
-                stmt.setDouble(6, cerveza.puntuacionCerveza)
+                stmt.setDouble(6, cerveza.precioCerveza)
                 stmt.setInt(7, cerveza.cantidadCerveza)
                 val filas = stmt.executeUpdate()
                 if (filas > 0) {
@@ -124,7 +124,7 @@ fun imprimirCervezas() {
                 "${it.tipoCerveza}, " +
                 "${it.colorCerveza}, " +
                 "${it.origenCerveza}, " +
-                "${it.puntuacionCerveza}*, " +
+                "${it.precioCerveza}*, " +
                 "${it.cantidadCerveza}")
     }
 }
@@ -141,7 +141,7 @@ fun imprimirCervezaSeleccionada() {
                 "Tipo: ${cerveza.tipoCerveza}, " +
                 "Color: ${cerveza.colorCerveza}, " +
                 "Origen: ${cerveza.origenCerveza}, " +
-                "Puntuación: ${cerveza.puntuacionCerveza}, " +
+                "Precio: ${cerveza.precioCerveza}, " +
                 "Cantidad: ${cerveza.cantidadCerveza}")
     } else {
         println("No se encontró ninguna cerveza con ese ID.")
@@ -155,7 +155,7 @@ fun escribirInsertarCerveza() {
             tipoCerveza = introducirDatos.leerDato("Introduce tipo: ", String::class.java, "Default"),
             colorCerveza = introducirDatos.leerDato("Introduce color: ", String::class.java, "Default"),
             origenCerveza = introducirDatos.leerDato("Introduce origen: ", String::class.java, "Default"),
-            puntuacionCerveza = introducirDatos.leerDato("Introduce puntuación: ", Double::class.java, 0.0),
+            precioCerveza = introducirDatos.leerDato("Introduce precio: ", Double::class.java, 0.0),
             cantidadCerveza = introducirDatos.leerDato("Introduce cantidad: ", Int::class.java, 0)
         )
     )
@@ -170,7 +170,7 @@ fun escribirActualizarCerveza() {
             tipoCerveza = introducirDatos.leerDato("Introduce tipo: ", String::class.java, "Default"),
             colorCerveza = introducirDatos.leerDato("Introduce color: ", String::class.java, "Default"),
             origenCerveza = introducirDatos.leerDato("Introduce origen: ", String::class.java, "Default"),
-            puntuacionCerveza = introducirDatos.leerDato("Introduce puntuación: ", Double::class.java, 0.0),
+            precioCerveza = introducirDatos.leerDato("Introduce precio: ", Double::class.java, 0.0),
             cantidadCerveza = introducirDatos.leerDato("Introduce cantidad: ", Int::class.java, 0)
         )
     )
@@ -179,5 +179,21 @@ fun eliminarCerveza() {
     imprimirCervezas()
     val id = introducirDatos.leerDato(variables.textoIdBorrar, Int::class.java, 0)
     CervezasDAO.eliminarCerveza(id)
+}
+fun calcularTotalPrecioCervezaPorId () {
+    imprimirTapas()
+    val idIntroducido = introducirDatos.leerDato("Introduce Id de Tapa que deseas calcular: ", Int::class.java, 0)
+    funciones.getConnection()?.use { conn ->
+        val sql = "SELECT fn_total_valor_tapa(?)"
+        conn.prepareStatement(sql).use { stmt ->
+            stmt.setInt(1, idIntroducido)
+            stmt.executeQuery().use { rs ->
+                if (rs.next()) {
+                    val resultado = rs.getInt(1)
+                    println("El precio total es: $resultado$")
+                }
+            }
+        }
+    }
 }
 
