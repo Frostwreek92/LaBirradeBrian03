@@ -11,6 +11,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("com.mysql:mysql-connector-j:9.0.0") //MySQL
 }
 
 tasks.test {
