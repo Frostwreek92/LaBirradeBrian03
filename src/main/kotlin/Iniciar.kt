@@ -40,15 +40,16 @@ class Iniciar {
         variables.salirTapas = false
         while (!variables.salirTapas) {
             println(variables.menuTapas)
-            val opcion = introducirDatos.leerDato("Introduce una opción entre 1 y 6: ", Int::class.java, 0)
+            val opcion = introducirDatos.leerDato("Introduce una opción entre 1 y 7: ", Int::class.java, 0)
             when (opcion) {
                 1 -> imprimirTapas()
                 2 -> imprimirTapaSeleccionada()
                 3 -> escribirInsertarTapa()
                 4 -> escribirActualizarTapa()
                 5 -> eliminarTapa()
-                6 -> variables.salirTapas = funciones.finEleccion()
-                else -> println("\nIntroduce un número entre el 1 y 6")
+                6 -> funciones.llamarProcedure()
+                7 -> variables.salirTapas = funciones.finEleccion()
+                else -> println("\nIntroduce un número entre el 1 y 7")
             }
         }
     }

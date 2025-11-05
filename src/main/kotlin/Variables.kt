@@ -32,7 +32,8 @@ class Variables {
         3. Insertar Tapas nueva
         4. Actualizar Tapas por ID
         5. Eliminar Tapa por ID
-        6. Volver
+        6. Calcular precio total Tapa por ID
+        7. Volver
     """.trimIndent()
     val menuProveedor = "\n" + """Menu Proveedor: 
         1. Listar Proveedores

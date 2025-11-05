@@ -18,5 +18,23 @@ class Funciones {
     fun finEleccion(): Boolean {
         return true
     }
+
+    // Función para llamar al procedure
+    fun llamarProcedure () {
+        imprimirTapas()
+        val idIntroducido = introducirDatos.leerDato("Introduce Id de Tapa que deseas calcula: ", Int::class.java, 0)
+        getConnection()?.use { conn ->
+            val sql = "SELECT fn_total_valor_tapa(?)"
+            conn.prepareStatement(sql).use { stmt ->
+                stmt.setInt(1, idIntroducido)
+                stmt.executeQuery().use { rs ->
+                    if (rs.next()) {
+                        val resultado = rs.getInt(1)
+                        println("El precio total es: $resultado$")
+                    }
+                }
+            }
+        }
+    }
 }
 
