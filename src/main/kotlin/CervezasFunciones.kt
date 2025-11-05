@@ -184,7 +184,7 @@ fun calcularTotalPrecioCervezaPorId () {
     imprimirTapas()
     val idIntroducido = introducirDatos.leerDato("Introduce Id de Tapa que deseas calcular: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
-        val sql = "SELECT fn_total_valor_tapa(?)"
+        val sql = "SELECT fn_total_valor_cerveza(?)"
         conn.prepareStatement(sql).use { stmt ->
             stmt.setInt(1, idIntroducido)
             stmt.executeQuery().use { rs ->
