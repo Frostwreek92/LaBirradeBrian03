@@ -24,7 +24,7 @@ class Iniciar {
         variables.salirCervezas = false
         while (!variables.salirCervezas) {
             println(variables.menuCervezas)
-            val opcion = introducirDatos.leerDato("Introduce una opción entre 1 y 7: ", Int::class.java, 0)
+            val opcion = introducirDatos.leerDato("Introduce una opción entre 1 y 9: ", Int::class.java, 0)
             when (opcion) {
                 1 -> imprimirCervezas()
                 2 -> imprimirCervezaSeleccionada()
@@ -32,8 +32,10 @@ class Iniciar {
                 4 -> escribirActualizarCerveza()
                 5 -> eliminarCerveza()
                 6 -> calcularTotalPrecioCervezaPorId()
-                7 -> variables.salirCervezas = funciones.finEleccion()
-                else -> println("\nIntroduce un número entre el 1 y 7")
+                7 -> sumarCervezasPorId()
+                8 -> restarCervezaPorId()
+                9 -> variables.salirCervezas = funciones.finEleccion()
+                else -> println("\nIntroduce un número entre el 1 y 9")
             }
         }
     }
@@ -41,7 +43,7 @@ class Iniciar {
         variables.salirTapas = false
         while (!variables.salirTapas) {
             println(variables.menuTapas)
-            val opcion = introducirDatos.leerDato("Introduce una opción entre 1 y 7: ", Int::class.java, 0)
+            val opcion = introducirDatos.leerDato("Introduce una opción entre 1 y 9: ", Int::class.java, 0)
             when (opcion) {
                 1 -> imprimirTapas()
                 2 -> imprimirTapaSeleccionada()
@@ -50,7 +52,9 @@ class Iniciar {
                 5 -> eliminarTapa()
                 6 -> calcularTotalPrecioTapaPorId()
                 7 -> variables.salirTapas = funciones.finEleccion()
-                else -> println("\nIntroduce un número entre el 1 y 7")
+                8 -> sumarTapasPorId()
+                9 -> restarTapasPorId()
+                else -> println("\nIntroduce un número entre el 1 y 9")
             }
         }
     }
@@ -74,13 +78,14 @@ class Iniciar {
         variables.salirRegistro = false
         while (!variables.salirRegistro) {
             println(variables.menuRegistro)
-            val opcion = introducirDatos.leerDato("Introduce una opción entre 1 y 4: ", Int::class.java, 0)
+            val opcion = introducirDatos.leerDato("Introduce una opción entre 1 y 5: ", Int::class.java, 0)
             when (opcion) {
                 1 -> sumarStock()
                 2 -> ventaStock()
                 3 -> mostrarRegistro()
-                4 -> variables.salirRegistro = funciones.finEleccion()
-                else -> println("\nIntroduce un numero entre el 1 y el 4")
+                4 -> mostrarStockTotal()
+                5 -> variables.salirRegistro = funciones.finEleccion()
+                else -> println("\nIntroduce un numero entre el 1 y el 5")
             }
         }
     }

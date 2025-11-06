@@ -1,3 +1,4 @@
+import java.sql.SQLException
 import kotlin.use
 
 data class Tapa(
@@ -157,6 +158,56 @@ fun calcularTotalPrecioTapaPorId () {
                     println("El precio total es: $resultado$")
                 }
             }
+        }
+    }
+}
+fun sumarTapasPorId() {
+    imprimirTapas()
+    val idTapa = introducirDatos.leerDato("Introduce ID de la tapa a aumentar: ", Int::class.java, 0)
+    val cantidad = introducirDatos.leerDato("Introduce Cantidad: ", Int::class.java, 0)
+    imprimirProveedor()
+    val idProveedor = introducirDatos.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
+    funciones.getConnection()?.use { conn ->
+        try {
+            conn.autoCommit = false
+            conn.prepareCall("{ CALL sp_sumar_tapa(?, ?, ?, ?) }").use { call ->
+                call.setInt(1, idTapa)
+                call.setInt(2, cantidad)
+                call.setString(3, "Suma")
+                call.setInt(4, idProveedor)
+                val rs = call.executeQuery()
+                if (rs.next()) println("\n${rs.getString("mensaje")}")
+            }
+            conn.commit()
+            println("\nTarea realizada con éxito.")
+        } catch (e: SQLException) {
+            println("\nError: ${e.message}")
+            conn.rollback()
+            println("\nTransacción revertida.")
+        }
+    }
+}
+fun restarTapasPorId() {
+    imprimirTapas()
+    val idTapa = introducirDatos.leerDato("Introduce ID de la tapa a reducir: ", Int::class.java, 0)
+    val cantidad = introducirDatos.leerDato("Introduce Cantidad a restar: ", Int::class.java, 0)
+    funciones.getConnection()?.use { conn ->
+        try {
+            conn.autoCommit = false
+            conn.prepareCall("{ CALL sp_restar_tapa(?, ?, ?) }").use { call ->
+                call.setInt(1, idTapa)
+                call.setInt(2, cantidad)
+                call.setString(3, "Resta")
+
+                val rs = call.executeQuery()
+                if (rs.next()) println("\n${rs.getString("mensaje")}")
+            }
+            conn.commit()
+            println("\nTarea realizada con éxito.")
+        } catch (e: SQLException) {
+            println("\nError: ${e.message}")
+            conn.rollback()
+            println("\nTransacción revertida.")
         }
     }
 }

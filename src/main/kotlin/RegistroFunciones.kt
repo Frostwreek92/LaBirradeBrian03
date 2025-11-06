@@ -294,4 +294,31 @@ fun ventaAmbas() {
         }
     }
 }
+fun mostrarStockTotal() {
+    funciones.getConnection()?.use { conn ->
+        try {
+            conn.prepareCall("{ CALL sp_mostrar_stock_total() }").use { call ->
+                val rs = call.executeQuery()
+                println("\n📦 STOCK TOTAL 📦")
+                println("----------------------------------------------------------")
+                println(String.format("%-10s %-20s %-10s %-10s %-10s",
+                    "Tipo", "Nombre", "Cantidad", "Precio", "Total"))
+                println("----------------------------------------------------------")
+                while (rs.next()) {
+                    val tipo = rs.getString("Tipo")
+                    val nombre = rs.getString("Nombre")
+                    val cantidad = rs.getInt("Cantidad")
+                    val precio = rs.getDouble("PrecioUnidad")
+                    val total = rs.getDouble("PrecioTotal")
+
+                    println(String.format("%-10s %-20s %-10d %-10.2f %-10.2f",
+                        tipo, nombre, cantidad, precio, total))
+                }
+                println("----------------------------------------------------------")
+            }
+        } catch (e: SQLException) {
+            println("\nError: ${e.message}")
+        }
+    }
+}
 

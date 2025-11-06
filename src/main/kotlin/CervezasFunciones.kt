@@ -1,3 +1,4 @@
+import java.sql.SQLException
 
 
 data class Cerveza(
@@ -180,7 +181,7 @@ fun eliminarCerveza() {
     val id = introducirDatos.leerDato(variables.textoIdBorrar, Int::class.java, 0)
     CervezasDAO.eliminarCerveza(id)
 }
-fun calcularTotalPrecioCervezaPorId () {
+fun calcularTotalPrecioCervezaPorId() {
     imprimirCervezas()
     val idIntroducido = introducirDatos.leerDato("Introduce Id de Cerveza que deseas calcular: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
@@ -193,6 +194,63 @@ fun calcularTotalPrecioCervezaPorId () {
                     println("El precio total es: $resultado$")
                 }
             }
+        }
+    }
+}
+fun sumarCervezasPorId() {
+    imprimirCervezas()
+    val idCerveza = introducirDatos.leerDato("Introduce ID de la cerveza a aumentar: ", Int::class.java, 0)
+    val cantidad = introducirDatos.leerDato("Introduce Cantidad: ", Int::class.java, 0)
+    imprimirProveedor()
+    val idProveedor = introducirDatos.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
+    funciones.getConnection()?.use { conn ->
+        try {
+            conn.autoCommit = false
+            // Llamada al procedimiento almacenado
+            conn.prepareCall("{ CALL sp_sumar_cerveza(?, ?, ?, ?) }").use { call ->
+                call.setInt(1, idCerveza)
+                call.setInt(2, cantidad)
+                call.setString(3, "Suma")  // valor del parámetro p_sumaResta
+                call.setInt(4, idProveedor)
+                val resultSet = call.executeQuery()
+                // Mostrar el mensaje que devuelve el procedimiento
+                if (resultSet.next()) {
+                    println("\n${resultSet.getString("mensaje")}")
+                }
+            }
+            conn.commit()
+            println("\nTarea realizada con éxito.")
+        } catch (e: SQLException) {
+            println("\nError: ${e.message}")
+            conn.rollback()
+            println("\nTransacción revertida.")
+        }
+    }
+}
+fun restarCervezaPorId() {
+    imprimirCervezas()
+    val idCerveza = introducirDatos.leerDato("Introduce ID de la cerveza a reducir: ", Int::class.java, 0)
+    val cantidad = introducirDatos.leerDato("Introduce Cantidad a restar: ", Int::class.java, 0)
+    funciones.getConnection()?.use { conn ->
+        try {
+            conn.autoCommit = false
+            // Llamada al procedimiento almacenado
+            conn.prepareCall("{ CALL sp_restar_cerveza(?, ?, ?) }").use { call ->
+                call.setInt(1, idCerveza)
+                call.setInt(2, cantidad)
+                call.setString(3, "Resta") // valor para el campo sumaResta
+                val rs = call.executeQuery()
+                // Mostrar mensaje devuelto por el procedimiento
+                if (rs.next()) {
+                    println("\n${rs.getString("mensaje")}")
+                }
+            }
+            conn.commit()
+            println("\nTarea realizada con éxito.")
+        } catch (e: SQLException) {
+            println("\nError: ${e.message}")
+            conn.rollback()
+            println("\nTransacción revertida.")
         }
     }
 }

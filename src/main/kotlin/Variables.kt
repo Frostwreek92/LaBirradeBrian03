@@ -25,7 +25,9 @@ class Variables {
         4. Actualizar Cerveza por ID
         5. Eliminar Cerveza por ID
         6. Calcula precio total Cerveza por ID
-        7. Volver
+        7. Sumar por ID con conexión a la BD
+        8. Restar por ID con conexión a la BD
+        9. Volver
     """.trimIndent()
     val menuTapas = "\n" + """Menú Tapas:
         1. Listar Tapas actuales
@@ -34,7 +36,9 @@ class Variables {
         4. Actualizar Tapas por ID
         5. Eliminar Tapa por ID
         6. Calcular precio total Tapa por ID
-        7. Volver
+        7. Sumar por ID con conexión a la BD
+        8. Restar por ID con conexión a la BD
+        9. Volver
     """.trimIndent()
     val menuProveedor = "\n" + """Menu Proveedor: 
         1. Listar Proveedores
@@ -48,7 +52,8 @@ class Variables {
         1. Sumar stock
         2. Venta de Artículos
         3. Mostrar Registro
-        4. Volver
+        4. Mostrar Stock de Todo
+        5. Volver
     """.trimIndent()
     val menuSumarStock = "\n" + """Menú para sumar stock:
         1. Sumar Cervezas
