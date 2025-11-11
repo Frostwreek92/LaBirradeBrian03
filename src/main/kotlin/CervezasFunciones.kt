@@ -92,6 +92,7 @@ object CervezasDAO {
                 stmt.setString(5, cerveza.origenCerveza)
                 stmt.setDouble(6, cerveza.precioCerveza)
                 stmt.setInt(7, cerveza.cantidadCerveza)
+                stmt.setInt(8, cerveza.idCerveza)
                 val filas = stmt.executeUpdate()
                 if (filas > 0) {
                     println("\nCerveza con ID = ${cerveza.idCerveza} actualizada con éxito.")
@@ -131,7 +132,7 @@ fun imprimirCervezas() {
 }
 fun imprimirCervezaSeleccionada() {
     imprimirCervezas()
-    val id = introducirDatos.leerDato(variables.textoIntroducirCervezaID,
+    val id = funciones.leerDato(variables.textoIntroducirCervezaID,
         Int::class.java,
         0)
     val cerveza = CervezasDAO.consultarCervezaPorId(id)
@@ -151,13 +152,13 @@ fun imprimirCervezaSeleccionada() {
 fun escribirInsertarCerveza() {
     CervezasDAO.insertarCerveza(
         Cerveza(
-            nombreCerveza = introducirDatos.leerDato("Introduce nombre: ", String::class.java, "Default"),
-            graduacionCerveza = introducirDatos.leerDato("Introduce graduación: ", Double::class.java, 0.0),
-            tipoCerveza = introducirDatos.leerDato("Introduce tipo: ", String::class.java, "Default"),
-            colorCerveza = introducirDatos.leerDato("Introduce color: ", String::class.java, "Default"),
-            origenCerveza = introducirDatos.leerDato("Introduce origen: ", String::class.java, "Default"),
-            precioCerveza = introducirDatos.leerDato("Introduce precio: ", Double::class.java, 0.0),
-            cantidadCerveza = introducirDatos.leerDato("Introduce cantidad: ", Int::class.java, 0)
+            nombreCerveza = funciones.leerDato("Introduce nombre: ", String::class.java, "Default"),
+            graduacionCerveza = funciones.leerDato("Introduce graduación: ", Double::class.java, 0.0),
+            tipoCerveza = funciones.leerDato("Introduce tipo: ", String::class.java, "Default"),
+            colorCerveza = funciones.leerDato("Introduce color: ", String::class.java, "Default"),
+            origenCerveza = funciones.leerDato("Introduce origen: ", String::class.java, "Default"),
+            precioCerveza = funciones.leerDato("Introduce precio: ", Double::class.java, 0.0),
+            cantidadCerveza = funciones.leerDato("Introduce cantidad: ", Int::class.java, 0)
         )
     )
 }
@@ -165,25 +166,25 @@ fun escribirActualizarCerveza() {
     imprimirCervezas()
     CervezasDAO.actualizarCerveza(
         Cerveza(
-            idCerveza = introducirDatos.leerDato("Introduce ID de la Cerveza que quieres cambiar: ", Int::class.java, 0),
-            nombreCerveza = introducirDatos.leerDato("Introduce nombre: ", String::class.java, "Default"),
-            graduacionCerveza = introducirDatos.leerDato("Introduce graduación: ", Double::class.java, 0.0),
-            tipoCerveza = introducirDatos.leerDato("Introduce tipo: ", String::class.java, "Default"),
-            colorCerveza = introducirDatos.leerDato("Introduce color: ", String::class.java, "Default"),
-            origenCerveza = introducirDatos.leerDato("Introduce origen: ", String::class.java, "Default"),
-            precioCerveza = introducirDatos.leerDato("Introduce precio: ", Double::class.java, 0.0),
-            cantidadCerveza = introducirDatos.leerDato("Introduce cantidad: ", Int::class.java, 0)
+            idCerveza = funciones.leerDato("Introduce ID de la Cerveza que quieres cambiar: ", Int::class.java, 0),
+            nombreCerveza = funciones.leerDato("Introduce nombre: ", String::class.java, "Default"),
+            graduacionCerveza = funciones.leerDato("Introduce graduación: ", Double::class.java, 0.0),
+            tipoCerveza = funciones.leerDato("Introduce tipo: ", String::class.java, "Default"),
+            colorCerveza = funciones.leerDato("Introduce color: ", String::class.java, "Default"),
+            origenCerveza = funciones.leerDato("Introduce origen: ", String::class.java, "Default"),
+            precioCerveza = funciones.leerDato("Introduce precio: ", Double::class.java, 0.0),
+            cantidadCerveza = funciones.leerDato("Introduce cantidad: ", Int::class.java, 0)
         )
     )
 }
 fun eliminarCerveza() {
     imprimirCervezas()
-    val id = introducirDatos.leerDato(variables.textoIdBorrar, Int::class.java, 0)
+    val id = funciones.leerDato(variables.textoIdBorrar, Int::class.java, 0)
     CervezasDAO.eliminarCerveza(id)
 }
 fun calcularTotalPrecioCervezaPorId() {
     imprimirCervezas()
-    val idIntroducido = introducirDatos.leerDato("Introduce Id de Cerveza que deseas calcular: ", Int::class.java, 0)
+    val idIntroducido = funciones.leerDato("Introduce Id de Cerveza que deseas calcular: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         val sql = "SELECT fn_total_valor_cerveza(?)"
         conn.prepareStatement(sql).use { stmt ->
@@ -199,10 +200,10 @@ fun calcularTotalPrecioCervezaPorId() {
 }
 fun sumarCervezasPorId() {
     imprimirCervezas()
-    val idCerveza = introducirDatos.leerDato("Introduce ID de la cerveza a aumentar: ", Int::class.java, 0)
-    val cantidad = introducirDatos.leerDato("Introduce Cantidad: ", Int::class.java, 0)
+    val idCerveza = funciones.leerDato("Introduce ID de la cerveza a aumentar: ", Int::class.java, 0)
+    val cantidad = funciones.leerDato("Introduce Cantidad: ", Int::class.java, 0)
     imprimirProveedor()
-    val idProveedor = introducirDatos.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
+    val idProveedor = funciones.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         try {
             conn.autoCommit = false
@@ -229,8 +230,8 @@ fun sumarCervezasPorId() {
 }
 fun restarCervezaPorId() {
     imprimirCervezas()
-    val idCerveza = introducirDatos.leerDato("Introduce ID de la cerveza a reducir: ", Int::class.java, 0)
-    val cantidad = introducirDatos.leerDato("Introduce Cantidad a restar: ", Int::class.java, 0)
+    val idCerveza = funciones.leerDato("Introduce ID de la cerveza a reducir: ", Int::class.java, 0)
+    val cantidad = funciones.leerDato("Introduce Cantidad a restar: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         try {
             conn.autoCommit = false

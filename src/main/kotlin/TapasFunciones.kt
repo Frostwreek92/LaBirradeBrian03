@@ -72,6 +72,7 @@ object TapasDAO {
                 stmt.setString(1, tapa.nombreTapa)
                 stmt.setDouble(2, tapa.precioTapa)
                 stmt.setInt(3, tapa.cantidadTapa)
+                stmt.setInt(4, tapa.idTapa)
                 val filas = stmt.executeUpdate()
                 if (filas > 0) {
                     println("\nTapa con ID = ${tapa.idTapa} actualizada con éxito.")
@@ -107,7 +108,7 @@ fun imprimirTapas() {
 }
 fun imprimirTapaSeleccionada() {
     imprimirTapas()
-    val id = introducirDatos.leerDato(variables.textoIntroducirTapaID,
+    val id = funciones.leerDato(variables.textoIntroducirTapaID,
         Int::class.java,
         0)
     val tapa = TapasDAO.consultarTapaPorId(id)
@@ -123,9 +124,9 @@ fun imprimirTapaSeleccionada() {
 fun escribirInsertarTapa() {
     TapasDAO.insertarTapa(
         Tapa(
-            nombreTapa = introducirDatos.leerDato("Introduce nombre: ", String::class.java, "Default"),
-            precioTapa = introducirDatos.leerDato("Introduce graduación: ", Double::class.java, 0.0),
-            cantidadTapa = introducirDatos.leerDato("Introduce cantidad: ", Int::class.java, 0)
+            nombreTapa = funciones.leerDato("Introduce nombre: ", String::class.java, "Default"),
+            precioTapa = funciones.leerDato("Introduce graduación: ", Double::class.java, 0.0),
+            cantidadTapa = funciones.leerDato("Introduce cantidad: ", Int::class.java, 0)
         )
     )
 }
@@ -133,21 +134,21 @@ fun escribirActualizarTapa() {
     imprimirTapas()
     TapasDAO.actualizarTapa(
         Tapa(
-            idTapa = introducirDatos.leerDato("Introduce ID de la Tapa que quieres cambiar: ", Int::class.java, 0),
-            nombreTapa = introducirDatos.leerDato("Introduce nombre: ", String::class.java, "Default"),
-            precioTapa = introducirDatos.leerDato("Introduce graduación: ", Double::class.java, 0.0),
-            cantidadTapa = introducirDatos.leerDato("Introduce cantidad: ", Int::class.java, 0)
+            idTapa = funciones.leerDato("Introduce ID de la Tapa que quieres cambiar: ", Int::class.java, 0),
+            nombreTapa = funciones.leerDato("Introduce nombre: ", String::class.java, "Default"),
+            precioTapa = funciones.leerDato("Introduce graduación: ", Double::class.java, 0.0),
+            cantidadTapa = funciones.leerDato("Introduce cantidad: ", Int::class.java, 0)
         )
     )
 }
 fun eliminarTapa() {
     imprimirTapas()
-    val id = introducirDatos.leerDato(variables.textoIdBorrar, Int::class.java, 0)
+    val id = funciones.leerDato(variables.textoIdBorrar, Int::class.java, 0)
     TapasDAO.eliminarTapa(id)
 }
 fun calcularTotalPrecioTapaPorId () {
     imprimirTapas()
-    val idIntroducido = introducirDatos.leerDato("Introduce Id de Tapa que deseas calcular: ", Int::class.java, 0)
+    val idIntroducido = funciones.leerDato("Introduce Id de Tapa que deseas calcular: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         val sql = "SELECT fn_total_valor_tapa(?)"
         conn.prepareStatement(sql).use { stmt ->
@@ -163,10 +164,10 @@ fun calcularTotalPrecioTapaPorId () {
 }
 fun sumarTapasPorId() {
     imprimirTapas()
-    val idTapa = introducirDatos.leerDato("Introduce ID de la tapa a aumentar: ", Int::class.java, 0)
-    val cantidad = introducirDatos.leerDato("Introduce Cantidad: ", Int::class.java, 0)
+    val idTapa = funciones.leerDato("Introduce ID de la tapa a aumentar: ", Int::class.java, 0)
+    val cantidad = funciones.leerDato("Introduce Cantidad: ", Int::class.java, 0)
     imprimirProveedor()
-    val idProveedor = introducirDatos.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
+    val idProveedor = funciones.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         try {
             conn.autoCommit = false
@@ -189,8 +190,8 @@ fun sumarTapasPorId() {
 }
 fun restarTapasPorId() {
     imprimirTapas()
-    val idTapa = introducirDatos.leerDato("Introduce ID de la tapa a reducir: ", Int::class.java, 0)
-    val cantidad = introducirDatos.leerDato("Introduce Cantidad a restar: ", Int::class.java, 0)
+    val idTapa = funciones.leerDato("Introduce ID de la tapa a reducir: ", Int::class.java, 0)
+    val cantidad = funciones.leerDato("Introduce Cantidad a restar: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         try {
             conn.autoCommit = false

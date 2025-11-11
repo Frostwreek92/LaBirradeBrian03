@@ -61,6 +61,7 @@ object ProveedorDAO {
         funciones.getConnection()?.use { conn ->
             conn.prepareStatement(variables.queryActualizarProveedor).use { stmt ->
                 stmt.setString(1, proveedor.nombreProveedor)
+                stmt.setInt(2, proveedor.idProveedor)
                 val filas = stmt.executeUpdate()
                 if (filas > 0) {
                     println("\nProveedor con ID = ${proveedor.idProveedor} actualizada con éxito.")
@@ -94,7 +95,7 @@ fun imprimirProveedor() {
 }
 fun imprimirProveedorSeleccionado() {
     imprimirProveedor()
-    val id = introducirDatos.leerDato(variables.textoIntroducirProveedorID,
+    val id = funciones.leerDato(variables.textoIntroducirProveedorID,
         Int::class.java,
         0)
     val proveedor = ProveedorDAO.consultarProveedorPorId(id)
@@ -108,7 +109,7 @@ fun imprimirProveedorSeleccionado() {
 fun escribirInsertarProveedor() {
     ProveedorDAO.insertarProveedor(
         Proveedor(
-            nombreProveedor = introducirDatos.leerDato("Introduce nombre: ", String::class.java, "Default")
+            nombreProveedor = funciones.leerDato("Introduce nombre: ", String::class.java, "Default")
         )
     )
 }
@@ -116,14 +117,14 @@ fun escribirActualizarProveedor() {
     imprimirProveedor()
     ProveedorDAO.actualizarProveedor(
         Proveedor(
-            idProveedor = introducirDatos.leerDato("Introduce ID del Proveedor que quieres cambiar: ", Int::class.java, 0),
-            nombreProveedor = introducirDatos.leerDato("Introduce nombre: ", String::class.java, "Default")
+            idProveedor = funciones.leerDato("Introduce ID del Proveedor que quieres cambiar: ", Int::class.java, 0),
+            nombreProveedor = funciones.leerDato("Introduce nombre: ", String::class.java, "Default")
         )
     )
 }
 fun eliminarProveedor() {
     imprimirProveedor()
-    val id = introducirDatos.leerDato(variables.textoIdBorrar, Int::class.java, 0)
+    val id = funciones.leerDato(variables.textoIdBorrar, Int::class.java, 0)
     ProveedorDAO.eliminarProveedor(id)
 }
 

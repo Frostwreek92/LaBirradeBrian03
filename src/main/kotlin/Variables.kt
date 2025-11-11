@@ -9,6 +9,7 @@ class Variables {
     var salirRegistro = false
     var salirSumarStock = false
     var salirVentaStock = false
+    var salirOpcionesAWS = false
     val finPrograma = "\nFin del programa"
     // Menús
     val menuInicio = "\n" + """Menú Principal:
@@ -16,7 +17,8 @@ class Variables {
         2. Operaciones con Tapas
         3. Operaciones con Proveedor
         4. Operaciones de Stock
-        5. Salir
+        5. Operaciones con AWS
+        6. Salir
     """.trimIndent()
     val menuCervezas = "\n" + """Menú Cervezas:
         1. Listar Cervezas actuales
@@ -24,10 +26,7 @@ class Variables {
         3. Insertar Cerveza nueva
         4. Actualizar Cerveza por ID
         5. Eliminar Cerveza por ID
-        6. Calcula precio total Cerveza por ID
-        7. Sumar por ID con conexión a la BD
-        8. Restar por ID con conexión a la BD
-        9. Volver
+        6. Volver
     """.trimIndent()
     val menuTapas = "\n" + """Menú Tapas:
         1. Listar Tapas actuales
@@ -35,10 +34,7 @@ class Variables {
         3. Insertar Tapas nueva
         4. Actualizar Tapas por ID
         5. Eliminar Tapa por ID
-        6. Calcular precio total Tapa por ID
-        7. Sumar por ID con conexión a la BD
-        8. Restar por ID con conexión a la BD
-        9. Volver
+        6. Volver
     """.trimIndent()
     val menuProveedor = "\n" + """Menu Proveedor: 
         1. Listar Proveedores
@@ -67,6 +63,17 @@ class Variables {
         3. Vender ambos a la vez
         4. Volver
     """.trimIndent()
+    val menuOpcionesAWS = "\n" + """Menú operaciones AWS
+        Funciones:
+        1. Calcular precio total Cerveza por ID
+        2. Calcular preio total Tapa por ID
+        Procedimientos:
+        3. Sumar Cervezas por ID
+        4. Sumar Tapas por ID
+        5. Restar Cervezas por ID
+        6. Restar Tapas por ID
+        7. Salir
+    """.trimIndent()
     // Ruta del archivo de BD
     val urlBD = "jdbc:mysql://ec2-98-90-151-148.compute-1.amazonaws.com:3306/LaBirradeBrian"
     val user = "AlvaroGM"
@@ -83,14 +90,15 @@ class Variables {
             "precioCerveza, " +
             "cantidadCerveza) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?)"
-    val queryActualizarCerveza = "UPDATE Cervezas SET (nombreCerveza, " +
-            "graduacionCerveza, " +
-            "tipoCerveza, " +
-            "colorCerveza, " +
-            "origenCerveza, " +
-            "precioCerveza, " +
-            "cantidadCerveza) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?)"
+    val queryActualizarCerveza = "UPDATE Cervezas SET " +
+            "nombreCerveza = ?," +
+            "graduacionCerveza = ?," +
+            "tipoCerveza = ?," +
+            "colorCerveza = ?," +
+            "origenCerveza = ?," +
+            "puntuacionCerveza = ?," +
+            "cantidadCerveza = ? " +
+            "WHERE idCerveza = ?"
     val queryEliminarCerveza = "DELETE FROM Cervezas WHERE idCerveza = ?"
     // Tapas
     val queryListarTapas = "SELECT * FROM Tapas"
@@ -99,16 +107,21 @@ class Variables {
             "precioTapa, " +
             "cantidadTapa) " +
             "VALUES (?, ?, ?)"
-    val queryActualizarTapa = "UPDATE Tapas SET (nombreTapa, " +
-            "precioTapa, " +
-            "cantidadTapa) " +
-            "VALUES (?, ?, ?)"
+    val queryActualizarTapa = "UPDATE Tapas SET " +
+            "nombreTapa = ?, " +
+            "precioTapa = ?, " +
+            "cantidadTapa = ? " +
+            "WHERE idTapa = ?"
     val queryEliminarTapa = "DELETE FROM Tapas WHERE idTapa = ?"
     // Proveedor
     val queryListarProveedores = "SELECT * FROM Proveedores"
     val queryConsultarProveedorPorId = "SELECT * FROM Proveedores WHERE idProveedor = ?"
-    val queryInsertarProveedor = "INSERT INTO Proveedores(nombreProveedor) VALUES (?)"
-    val queryActualizarProveedor = "UPDATE Proveedores SET (nombreProveedor) VALUES (?)"
+    val queryInsertarProveedor = "INSERT INTO Proveedores(" +
+            "nombreProveedor) " +
+            "VALUES (?)"
+    val queryActualizarProveedor = "UPDATE Proveedores SET " +
+            "nombreProveedor = ? " +
+            "WHERE idProveedor = ?"
     val queryEliminarProveedor = "DELETE FROM Proveedores WHERE idProveedor = ?"
     // Registro
     val queryListarRegistro = "SELECT * FROM Registro"
@@ -127,5 +140,4 @@ class Variables {
 val variables = Variables()
 val iniciar = Iniciar()
 val funciones = Funciones()
-val introducirDatos = IntroducirDatos()
 

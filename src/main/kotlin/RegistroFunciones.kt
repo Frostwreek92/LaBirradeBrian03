@@ -55,10 +55,10 @@ fun mostrarRegistro() {
 }
 fun sumarCerveza() {
     imprimirCervezas()
-    val sumarIdCerveza = introducirDatos.leerDato("Introduce ID de la cerveza a aumentar: ", Int::class.java, 0)
-    val sumarCantidadCerveza = introducirDatos.leerDato("Introduce Cantidad: ", Int::class.java, 0)
+    val sumarIdCerveza = funciones.leerDato("Introduce ID de la cerveza a aumentar: ", Int::class.java, 0)
+    val sumarCantidadCerveza = funciones.leerDato("Introduce Cantidad: ", Int::class.java, 0)
     imprimirProveedor()
-    val sumarIdProveedor = introducirDatos.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
+    val sumarIdProveedor = funciones.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         try {
             conn.autoCommit = false
@@ -86,10 +86,10 @@ fun sumarCerveza() {
 }
 fun sumarTapa() {
     imprimirTapas()
-    val sumarIdTapa = introducirDatos.leerDato("Introduce ID de la tapa a aumentar: ", Int::class.java, 0)
-    val sumarCantidadTapa = introducirDatos.leerDato("Introduce Cantidad: ", Int::class.java, 0)
+    val sumarIdTapa = funciones.leerDato("Introduce ID de la tapa a aumentar: ", Int::class.java, 0)
+    val sumarCantidadTapa = funciones.leerDato("Introduce Cantidad: ", Int::class.java, 0)
     imprimirProveedor()
-    val sumarIdProveedor = introducirDatos.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
+    val sumarIdProveedor = funciones.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         try {
             conn.autoCommit = false
@@ -117,13 +117,13 @@ fun sumarTapa() {
 }
 fun sumarAmbas() {
     imprimirCervezas()
-    val sumarIdCerveza = introducirDatos.leerDato("Introduce ID de la cerveza a aumentar: ", Int::class.java, 0)
-    val sumarCantidadCerveza = introducirDatos.leerDato("Introduce Cantidad: ", Int::class.java, 0)
+    val sumarIdCerveza = funciones.leerDato("Introduce ID de la cerveza a aumentar: ", Int::class.java, 0)
+    val sumarCantidadCerveza = funciones.leerDato("Introduce Cantidad: ", Int::class.java, 0)
     imprimirTapas()
-    val sumarIdTapa = introducirDatos.leerDato("Introduce ID de la tapa a aumentar: ", Int::class.java, 0)
-    val sumarCantidadTapa = introducirDatos.leerDato("Introduce Cantidad: ", Int::class.java, 0)
+    val sumarIdTapa = funciones.leerDato("Introduce ID de la tapa a aumentar: ", Int::class.java, 0)
+    val sumarCantidadTapa = funciones.leerDato("Introduce Cantidad: ", Int::class.java, 0)
     imprimirProveedor()
-    val sumarIdProveedor = introducirDatos.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
+    val sumarIdProveedor = funciones.leerDato("Introduce ID del Proveedor: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         try {
             conn.autoCommit = false
@@ -158,8 +158,8 @@ fun sumarAmbas() {
 }
 fun ventaCerveza() {
     imprimirCervezas()
-    val idCerveza = introducirDatos.leerDato("Introduce ID de la cerveza a vender: ", Int::class.java, 0)
-    val cantidadVenta = introducirDatos.leerDato("Introduce cantidad a vender: ", Int::class.java, 0)
+    val idCerveza = funciones.leerDato("Introduce ID de la cerveza a vender: ", Int::class.java, 0)
+    val cantidadVenta = funciones.leerDato("Introduce cantidad a vender: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         try {
             conn.autoCommit = false
@@ -198,8 +198,8 @@ fun ventaCerveza() {
 }
 fun ventaTapa() {
     imprimirTapas()
-    val idTapa = introducirDatos.leerDato("Introduce ID de la tapa a vender: ", Int::class.java, 0)
-    val cantidadVenta = introducirDatos.leerDato("Introduce cantidad a vender: ", Int::class.java, 0)
+    val idTapa = funciones.leerDato("Introduce ID de la tapa a vender: ", Int::class.java, 0)
+    val cantidadVenta = funciones.leerDato("Introduce cantidad a vender: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         try {
             conn.autoCommit = false
@@ -238,11 +238,11 @@ fun ventaTapa() {
 }
 fun ventaAmbas() {
     imprimirCervezas()
-    val idCerveza = introducirDatos.leerDato("Introduce ID de la cerveza a vender: ", Int::class.java, 0)
-    val cantidadCerveza = introducirDatos.leerDato("Introduce cantidad de cerveza: ", Int::class.java, 0)
+    val idCerveza = funciones.leerDato("Introduce ID de la cerveza a vender: ", Int::class.java, 0)
+    val cantidadCerveza = funciones.leerDato("Introduce cantidad de cerveza: ", Int::class.java, 0)
     imprimirTapas()
-    val idTapa = introducirDatos.leerDato("Introduce ID de la tapa a vender: ", Int::class.java, 0)
-    val cantidadTapa = introducirDatos.leerDato("Introduce cantidad de tapa: ", Int::class.java, 0)
+    val idTapa = funciones.leerDato("Introduce ID de la tapa a vender: ", Int::class.java, 0)
+    val cantidadTapa = funciones.leerDato("Introduce cantidad de tapa: ", Int::class.java, 0)
     funciones.getConnection()?.use { conn ->
         try {
             conn.autoCommit = false
