@@ -48,8 +48,7 @@ class Variables {
         1. Sumar stock
         2. Venta de Artículos
         3. Mostrar Registro
-        4. Mostrar Stock de Todo
-        5. Volver
+        4. Volver
     """.trimIndent()
     val menuSumarStock = "\n" + """Menú para sumar stock:
         1. Sumar Cervezas
@@ -67,12 +66,13 @@ class Variables {
         Funciones:
         1. Calcular precio total Cerveza por ID
         2. Calcular preio total Tapa por ID
+        3. Mostrar Stock de Todo
         Procedimientos:
-        3. Sumar Cervezas por ID
-        4. Sumar Tapas por ID
-        5. Restar Cervezas por ID
-        6. Restar Tapas por ID
-        7. Salir
+        4. Sumar Cervezas por ID
+        5. Sumar Tapas por ID
+        6. Restar Cervezas por ID
+        7. Restar Tapas por ID
+        8. Salir
     """.trimIndent()
     // Ruta del archivo de BD
     val urlBD = "jdbc:mysql://ec2-98-90-151-148.compute-1.amazonaws.com:3306/LaBirradeBrian"

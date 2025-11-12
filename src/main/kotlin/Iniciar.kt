@@ -73,14 +73,13 @@ class Iniciar {
         variables.salirRegistro = false
         while (!variables.salirRegistro) {
             println(variables.menuRegistro)
-            val opcion = funciones.leerDato("Introduce una opción entre 1 y 5: ", Int::class.java, 0)
+            val opcion = funciones.leerDato("Introduce una opción entre 1 y 4: ", Int::class.java, 0)
             when (opcion) {
                 1 -> sumarStock()
                 2 -> ventaStock()
                 3 -> mostrarRegistro()
-                4 -> mostrarStockTotal()
-                5 -> variables.salirRegistro = funciones.finEleccion()
-                else -> println("\nIntroduce un numero entre el 1 y el 5")
+                4 -> variables.salirRegistro = funciones.finEleccion()
+                else -> println("\nIntroduce un numero entre el 1 y el 4")
             }
         }
     }
@@ -116,16 +115,17 @@ class Iniciar {
         variables.salirOpcionesAWS = false
         while (!variables.salirOpcionesAWS) {
             println(variables.menuOpcionesAWS)
-            val opcion = funciones.leerDato("Introduce una opción entre 1 y 7: ", Int::class.java, 0)
+            val opcion = funciones.leerDato("Introduce una opción entre 1 y 8: ", Int::class.java, 0)
             when (opcion) {
                 1 -> calcularTotalPrecioCervezaPorId()
                 2 -> calcularTotalPrecioTapaPorId()
-                3 -> sumarCervezasPorId()
-                4 -> restarCervezaPorId()
-                5 -> sumarTapasPorId()
-                6 -> restarTapasPorId()
-                7 -> variables.salirOpcionesAWS = funciones.finEleccion()
-                else -> println("\nIntroduce un numero entre el 1 y el 7")
+                3 -> mostrarStockTotal()
+                4 -> sumarCervezasPorId()
+                5 -> restarCervezaPorId()
+                6 -> sumarTapasPorId()
+                7 -> restarTapasPorId()
+                8 -> variables.salirOpcionesAWS = funciones.finEleccion()
+                else -> println("\nIntroduce un numero entre el 1 y el 8")
             }
         }
     }
